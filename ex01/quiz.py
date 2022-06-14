@@ -19,4 +19,4 @@ else:
     print("出直してこい")
 
 syutudai = [a,b,c]
-print(rondom.shuffle(lst))
+print(rondom.randint(lst))
