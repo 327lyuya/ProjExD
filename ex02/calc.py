@@ -9,11 +9,8 @@ def button_click(event):
         res = eval(eqn)
         entry.delete(0,tk.END)
         entry.insert(tk.END,res)
-    else:
-        #tkm.showinfo("",f"{num}のボタンがクリックされました")
-        entry.insert(tk.END,num)
     
-    if num == "AC":#オールクリア
+    elif num == "AC":#オールクリア
         entry.delete(0,tk.END)
 
     #if num == "C":
@@ -21,19 +18,28 @@ def button_click(event):
         #entry.delete(len(eqn)-1,tk.END)[クリア機能]
 
 
-    #if num == "%":
-        #p = entry / 100
-        #entry.delete(0,tk.END)
-        #entry.insert(tk.END,p)[%機能]
+    elif num == "%":
+        eqn = entry.get()
+        res = eval(eqn + "/ 100")
+        entry.delete(0,tk.END)
+        entry.insert(tk.END,res)
 
-    #if num == "+/-":[+/-の切り替え機能]
+
+    elif num == "+/-":
+        eqn = entry.get()
+        res = eval(eqn + "* -1")
+        entry.delete(0,tk.END)
+        entry.insert(tk.END,res)
+
+    else:
+        #tkm.showinfo("",f"{num}のボタンがクリックされました")
+        entry.insert(tk.END,num)
         
         
 
 if __name__=="__main__":
     root = tk.Tk()
     root.title("電卓")
-    root.geometry("392x700")
 
     entry = tk.Entry(root,
                     justify="right",
