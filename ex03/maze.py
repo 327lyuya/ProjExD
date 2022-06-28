@@ -5,8 +5,6 @@ def key_down(event):
     global key
     key = event.keysym
 
-
-    
 def key_up(event):
     global key
     key = ""
@@ -25,7 +23,7 @@ def main_proc():
     if key == "Down" and maze_bg[my+1][mx] == 0: my += 1
     if key == "Left" and maze_bg[my][mx-1] == 0: mx -= 1
     if key == "Right" and maze_bg[my][mx+1] == 0: mx += 1
-    cx, cy = mx*100+50, my*100+50
+    cx, cy = mx*50+30, my*50+30
     canvas.coords("tori", cx, cy)
     root.after(100, main_proc)
 
@@ -34,13 +32,13 @@ if __name__ == "__main__":
     root.title("迷えるこうかとん")
     canvas = tk.Canvas(root,width=1500,height=900,bg="black")
     canvas.pack()
-    maze_bg = mm.make_maze(15, 9) #1:壁/0:床を表す
+    maze_bg = mm.make_maze(30, 20) #1:壁/0:床を表す
     mm.show_maze(canvas, maze_bg)
 
 
     tori = tk.PhotoImage(file="fig/8.png")
     mx, my = 1, 1
-    cx, cy = mx*100+50, my*100+50
+    cx, cy = mx*30+30, my*30+30
     canvas.create_image(cx, cy, image=tori, tag="tori")
 
     key = ""
