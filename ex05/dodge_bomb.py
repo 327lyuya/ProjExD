@@ -79,6 +79,7 @@ class Beam:
         self.sfc.midleft = chr.rct.center
 
 
+
 def main():
     clock = pg.time.Clock()
     scr = Screen("逃げろ！こうかとん", (1600, 900), "fig/pg_bg.jpg")
