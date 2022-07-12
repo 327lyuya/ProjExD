@@ -28,13 +28,13 @@ class Bird:
     def update(self, scr: Screen):
         key_states = pg.key.get_pressed() # 辞書
         if key_states[pg.K_UP]: 
-            self.rct.centery -= 1
+            self.rct.move_ip(0, -1)
         if key_states[pg.K_DOWN]: 
-            self.rct.centery += 1
+            self.rct.move_ip(0, +1)
         if key_states[pg.K_LEFT]: 
-            self.rct.centerx -= 1
+            self.rct.move_ip(-1, 0)
         if key_states[pg.K_RIGHT]: 
-            self.rct.centerx += 1
+            self.rct.move_ip(+1, 0)
         # # 練習7
         if check_bound(self.rct, scr.rct) != (1, 1): # 領域外だったら
             if key_states[pg.K_UP]: 
@@ -66,7 +66,8 @@ class Bomb:
     def update(self, scr: Screen):
         self.rct.move_ip(self.vx, self.vy)
         yoko, tate = check_bound(self.rct, scr.rct)
-        
+        self.vx *= yoko
+        self.vy *= tate
         self.blit(scr)          
 
 
