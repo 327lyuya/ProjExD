@@ -102,8 +102,8 @@ def main():
                 beam.update(scr)
         if kkt.rct.colliderect(bkd.rct):
             return
-        if beam.sfc.collidedict(bkd.rct):
-            return
+        #if beam.sfc.collidedict(bkd.rct):
+         #   return
 
         pg.display.update()
         clock.tick(1000)
