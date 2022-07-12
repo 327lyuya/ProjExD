@@ -46,6 +46,8 @@ class Bird:
             if key_states[pg.K_RIGHT]: 
                 self.rct.centerx -= 1
         self.blit(scr)
+    def attack(self):
+        return Beam(self)
 
 
 class Bomb:
@@ -62,14 +64,18 @@ class Bomb:
         scr.sfc.blit(self.sfc, self.rct)
 
     def update(self, scr: Screen):
-        # 練習6
         self.rct.move_ip(self.vx, self.vy)
-        # 練習7
         yoko, tate = check_bound(self.rct, scr.rct)
-        self.vx *= yoko
-        self.vy *= tate   
-        # 練習5
+        
         self.blit(scr)          
+
+
+class Beam:
+    def __init__(self, chr: Bird):
+        self.sfc = pg.image.load("fig/beam.png")
+        self.sfc = pg.transform.rotozoom(self.sfc, 0, 0.4)
+        self.sfc = self.sfc.get_rect()
+        self.sfc.midleft = chr.rct.center
 
 
 def main():
@@ -78,16 +84,25 @@ def main():
     kkt = Bird("fig/6.png", 2.0, (900, 400))
     bkd = Bomb((255,0,0), 10, (+1,+1), scr)
 
+    beams = []
     while True:
         scr.blit()
 
-        # 練習2
         for event in pg.event.get():
-            if event.type == pg.QUIT: return
+            if event.type == pg.QUIT:
+                return
+            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+                beam = kkt.attack()
+                kkt = Bird("fig/ダウンロード.jfif", 2.0, (900, 400))
 
         kkt.update(scr)
         bkd.update(scr)
+        if len(beams)!= 0:
+            for beam in beams:   
+                beam.update(scr)
         if kkt.rct.colliderect(bkd.rct):
+            return
+        if beam.sfc.collidedict(bkd.rct):
             return
 
         pg.display.update()
