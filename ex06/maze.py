@@ -9,6 +9,7 @@ def key_down(event):
 def key_up(event):
     global key
     key = ""
+    
 
 def main_proc():
     global mx, my
